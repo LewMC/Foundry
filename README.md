@@ -1,4 +1,4 @@
-![Foundry banner](https://cdn.modrinth.com/data/cached_images/14a2115564c60ec8b86e226d8435e2e68538c435_0.webp)
+![Foundry Banner](https://cdn.modrinth.com/data/cached_images/53f7d3d07af13bc8b841f1c7c6c5530fa4b5088b_0.webp)
 
 - 💾 **Download Foundry** - https://lewmc.net/plugin/foundry
 - 🔧 **View the JavaDocs** - https://lewmc.github.io/Foundry
