@@ -9,7 +9,7 @@ jobs:
     steps:
       - uses: s4u/maven-settings-action@v3.1.0
         with:
-          servers: '[{"id": "${{ secrets.MAVEN_ID }}", "username": "${{ secrets.MAVEN_NAME }}", "password": "${{ secrets.MAVEN_SECRET }}"}]'
+          servers: '[{"id": "lewmc-releases", "username": "${{ secrets.MAVEN_NAME }}", "password": "${{ secrets.MAVEN_SECRET }}"}]'
       - uses: actions/checkout@v2
       - name: Set up JDK
         uses: actions/setup-java@v1
