@@ -14,6 +14,11 @@ public class FoundryConfig {
     public Plugin plugin;
 
     /**
+     * Should Foundry
+     */
+    public boolean verbose;
+
+    /**
      * Sets up the FoundryConfig class.
      * @param plugin Plugin - The parent plugin.
      */
