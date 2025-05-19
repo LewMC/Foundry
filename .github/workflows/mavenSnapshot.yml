@@ -1,14 +1,14 @@
-name: Publish project to Maven repository
+name: Publish project to LewMC Repo (Snapshot)
 on:
   push:
-    branches: [ main ]
+    branches-ignore: [ main ]
 jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
       - uses: s4u/maven-settings-action@v3.1.0
         with:
-          servers: '[{"id": "lewmc-releases", "username": "${{ secrets.MAVEN_NAME }}", "password": "${{ secrets.MAVEN_SECRET }}"}]'
+          servers: '[{"id": "lewmc-snapshots", "username": "${{ secrets.MAVEN_NAME }}", "password": "${{ secrets.MAVEN_SECRET }}"}]'
       - uses: actions/checkout@v4
       - name: Set up JDK
         uses: actions/setup-java@v2

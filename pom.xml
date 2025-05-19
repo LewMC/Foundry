@@ -121,5 +121,9 @@
             <id>lewmc-releases</id>
             <url>https://repo.lewmc.net/releases</url>
         </repository>
+        <snapshotRepository>
+            <id>lewmc-snapshots</id>
+            <url>https://repo.lewmc.net/snapshots</url>
+        </snapshotRepository>
     </distributionManagement>
 </project>
