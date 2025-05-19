@@ -84,11 +84,6 @@
             <id>jitpack.io</id>
             <url>https://jitpack.io</url>
         </repository>
-        <repository>
-            <id>lewmc-releases</id>
-            <name>LewMC Repository</name>
-            <url>https://repo.lewmc.net/releases</url>
-        </repository>
     </repositories>
 
     <dependencies>

@@ -1,20 +1,20 @@
 package net.lewmc.foundry.utils;
 
-import net.lewmc.foundry.Foundry;
+import net.lewmc.foundry.FoundryConfig;
 import org.bukkit.Bukkit;
 
 /**
  * Essence's logger.
  */
 public class LogUtil {
-    private final Foundry plugin;
+    private final FoundryConfig config;
 
     /**
      * Constructor for the LogUtil class.
-     * @param plugin - Reference to the main Essence class.
+     * @param config - Reference to the main Essence class.
      */
-    public LogUtil(Foundry plugin) {
-        this.plugin = plugin;
+    public LogUtil(FoundryConfig config) {
+        this.config = config;
     }
 
     /**
@@ -22,7 +22,7 @@ public class LogUtil {
      * @param message String - Message to log.
      */
     public void info(String message) {
-        Bukkit.getLogger().info("[" + this.plugin.pluginId.toUpperCase() + "] " + message);
+        Bukkit.getLogger().info("[" + this.config.pluginId.toUpperCase() + "] " + message);
     }
 
     /**
@@ -30,7 +30,7 @@ public class LogUtil {
      * @param message String - Message to log.
      */
     public void warn(String message) {
-        Bukkit.getLogger().warning("[" + this.plugin.pluginId.toUpperCase() + "] " + message);
+        Bukkit.getLogger().warning("[" + this.config.pluginId.toUpperCase() + "] " + message);
     }
 
     /**
@@ -38,7 +38,7 @@ public class LogUtil {
      * @param message String - Message to log.
      */
     public void severe(String message) {
-        Bukkit.getLogger().severe("[" + this.plugin.pluginId.toUpperCase() + "] " + message);
+        Bukkit.getLogger().severe("[" + this.config.pluginId.toUpperCase() + "] " + message);
     }
 
     /**
