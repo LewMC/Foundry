@@ -4,14 +4,14 @@ import net.lewmc.foundry.FoundryConfig;
 import org.bukkit.Bukkit;
 
 /**
- * Essence's logger.
+ * Logging Utility.
  */
 public class LogUtil {
     private final FoundryConfig config;
 
     /**
      * Constructor for the LogUtil class.
-     * @param config - Reference to the main Essence class.
+     * @param config - Reference to the config class.
      */
     public LogUtil(FoundryConfig config) {
         this.config = config;
