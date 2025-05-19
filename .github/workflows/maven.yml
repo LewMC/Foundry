@@ -16,7 +16,7 @@ jobs:
           java-version: 21
 
       - name: Publish with MVN
-        run: ./mvn build publish
+        run: mvn build publish
         env:
           MAVEN_NAME: ${{ secrets.MAVEN_NAME }} # token name
           MAVEN_SECRET: ${{ secrets.MAVEN_SECRET }} # token secret (password)
