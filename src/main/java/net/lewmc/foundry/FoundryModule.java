@@ -1,6 +1,7 @@
 package net.lewmc.foundry;
 
 import org.bukkit.plugin.java.JavaPlugin;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Essence Module class
@@ -21,7 +22,7 @@ abstract public class FoundryModule {
      * @param plugin    Reference to the main plugin class.
      * @param reg       The Foundry Registry.
      */
-    public FoundryModule(JavaPlugin plugin, Registry reg) {
+    public FoundryModule(@NotNull JavaPlugin plugin, @NotNull Registry reg) {
         this.plugin = plugin;
         this.reg = reg;
 
