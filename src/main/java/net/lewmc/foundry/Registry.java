@@ -81,12 +81,36 @@ public class Registry {
      */
     public boolean tabCompleter(String command, TabCompleter completer) {
         if (this.plugin.getCommand(command) != null) {
-            Objects.requireNonNull(this.plugin.getCommand("tp")).setTabCompleter(completer);
+            Objects.requireNonNull(this.plugin.getCommand(command)).setTabCompleter(completer);
             return true;
         } else {
             new Logger(this.config).severe("Failed to register tab completer " + command + " because it is null.");
             return false;
         }
+    }
+
+    /**
+     * Registers a Tab Completer with the server, handling any potential issues.
+     * @param commands String - The command label, what users type into chat after the / to execute it.
+     * @param completer TabCompleter - The tab completer class.
+     * @return boolean - Was the tab completer successfully registered?
+     */
+    public boolean[] tabCompleter(String[] commands, TabCompleter completer) {
+
+        boolean[] success = new boolean[commands.length];
+        int i = 0;
+
+        for (String command : commands) {
+            if (this.plugin.getCommand(command) != null) {
+                Objects.requireNonNull(this.plugin.getCommand(command)).setTabCompleter(completer);
+                success[i] = true;
+            } else {
+                new Logger(this.config).severe("Failed to register command " + command + " because it is null.");
+                success[i] = false;
+            }
+            i++;
+        }
+        return success;
     }
 
     /**
