@@ -26,6 +26,17 @@ public class LogUtil {
     }
 
     /**
+     * Logs a message to the server console as informational (standard) only if verbose mode is enabled.
+     * Useful for logging information that may be required to diagnose information, but not required generally.
+     * @param message String - Message to log.
+     */
+    public void verboseInfo(String message) {
+        if (this.config.verbose) {
+            Bukkit.getLogger().info("[" + this.config.pluginId.toUpperCase() + "] " + message);
+        }
+    }
+
+    /**
      * Logs a message to the server console as warning (non-fatal error).
      * @param message String - Message to log.
      */
