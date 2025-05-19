@@ -1,7 +1,3 @@
-env:
-  MAVEN_NAME: ${{ secrets.MAVEN_NAME }}
-  MAVEN_SECRET: ${{ secrets.MAVEN_SECRET }}
-
 name: Publish project to LewMC Repo
 on:
   push:
@@ -10,6 +6,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: s4u/maven-settings-action@v3.1.0
+        env:
+          MAVEN_NAME: ${{ secrets.MAVEN_NAME }}
+          MAVEN_SECRET: ${{ secrets.MAVEN_SECRET }}
         with:
           servers: |
             [
