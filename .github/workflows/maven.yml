@@ -15,8 +15,8 @@ jobs:
           distribution: 'zulu'
           java-version: 21
 
-      - name: Debug secrets
-        run: echo "MAVEN_NAME = ${{ secrets.MAVEN_NAME }}"
+      - name: Show generated settings.xml
+        run: cat $HOME/.m2/settings.xml
 
       - name: Check Settings
         run: mvn help:effective-settings
