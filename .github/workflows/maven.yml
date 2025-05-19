@@ -14,17 +14,9 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 21
-      - name: Change wrapper permissions
-        run: chmod +x ./gradlew
 
-      - name: Init gradle wrapper
-        run: gradle wrapper
-
-      - name: Change wrapper permissions
-        run: chmod +x ./gradlew
-
-      - name: Publish with Gradle
-        run: ./gradlew build publish
+      - name: Publish with MVN
+        run: ./mvn build publish
         env:
           MAVEN_NAME: ${{ secrets.MAVEN_NAME }} # token name
           MAVEN_SECRET: ${{ secrets.MAVEN_SECRET }} # token secret (password)
