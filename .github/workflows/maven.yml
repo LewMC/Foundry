@@ -5,25 +5,25 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
-      - uses: s4u/maven-settings-action@v3.1.0
-        env:
-          MAVEN_NAME: ${{ secrets.MAVEN_NAME }}
-          MAVEN_SECRET: ${{ secrets.MAVEN_SECRET }}
-        with:
-          servers: |
-            [
-              {
-                "id": "lewmc",
-                "username": "${env.MAVEN_NAME}",
-                "password": "${env.MAVEN_SECRET}"
-              }
-            ]
       - uses: actions/checkout@v4
       - name: Set up JDK
         uses: actions/setup-java@v2
         with:
           distribution: 'zulu'
           java-version: 21
+
+      - name: Setup Maven settings.xml
+        run: |
+          mkdir -p $HOME/.m2
+          echo "<settings>
+            <servers>
+              <server>
+                <id>lewmc</id>
+                <username>${{ secrets.MAVEN_NAME }}</username>
+                <password>${{ secrets.MAVEN_SECRET }}</password>
+              </server>
+            </servers>
+          </settings>" > $HOME/.m2/settings.xml
 
       - name: Show generated settings.xml
         run: cat $HOME/.m2/settings.xml
