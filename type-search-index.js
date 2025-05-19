@@ -1,1 +1,1 @@
-typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"net.lewmc.foundry","l":"FoundryConfig"},{"p":"net.lewmc.foundry.utils","l":"LogUtil"},{"p":"net.lewmc.foundry.utils","l":"PermissionHandler"},{"p":"net.lewmc.foundry.utils","l":"SecurityUtil"}];updateSearchResults();
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"net.lewmc.foundry","l":"FoundryConfig"},{"p":"net.lewmc.foundry","l":"Logger"},{"p":"net.lewmc.foundry","l":"Permissions"},{"p":"net.lewmc.foundry","l":"Security"}];updateSearchResults();
