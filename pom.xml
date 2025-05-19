@@ -115,4 +115,11 @@
             <version>2.2-SNAPSHOT</version>
         </dependency>
     </dependencies>
+
+    <distributionManagement>
+        <repository>
+            <id>lewmc-releases</id>
+            <url>https://repo.lewmc.net/releases</url>
+        </repository>
+    </distributionManagement>
 </project>
