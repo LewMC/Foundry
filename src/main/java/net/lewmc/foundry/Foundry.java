@@ -10,13 +10,6 @@ import org.bukkit.plugin.java.JavaPlugin;
  */
 public class Foundry extends JavaPlugin {
 
-    /**
-     * The logging system.
-     */
-    private final LogUtil log = new LogUtil(this.config);
-
-    public String pluginId = "Foundry";
-
     public FoundryConfig config;
 
     /**
@@ -24,19 +17,24 @@ public class Foundry extends JavaPlugin {
      */
     @Override
     public void onEnable() {
-        this.log.info("Running Foundry version " + this.getDescription().getVersion() + ".");
-        this.log.info("Please report any issues with Foundry to our GitHub repository: https://github.com/lewmc/foundry/issues");
-        this.log.info("");
-        this.log.info("Beginning startup...");
-        this.log.info("");
-
         this.config = new FoundryConfig("Foundry");
+        LogUtil log = new LogUtil(this.config);
+
+        log.info("█████████████████████████████████████████████");
+        log.info("█▄─▄▄─█─▄▄─█▄─██─▄█▄─▀█▄─▄█▄─▄▄▀█▄─▄▄▀█▄─█─▄█");
+        log.info("██─▄███─██─██─██─███─█▄▀─███─██─██─▄─▄██▄─▄██");
+        log.info("▀▄▄▄▀▀▀▄▄▄▄▀▀▄▄▄▄▀▀▄▄▄▀▀▄▄▀▄▄▄▄▀▀▄▄▀▄▄▀▀▄▄▄▀▀");
+        log.info("");
+        log.info("█▄─▄▄─█─▄▄─█▄─██─▄█▄─▀█▄─▄█▄─▄▄▀█▄─▄▄▀█▄─█─▄█");
+        log.info("██─▄███─██─██─██─███─█▄▀─███─██─██─▄─▄██▄─▄██");
+        log.info("▀▄▄▄▀▀▀▄▄▄▄▀▀▄▄▄▄▀▀▄▄▄▀▀▄▄▀▄▄▄▄▀▀▄▄▀▄▄▀▀▄▄▄▀▀");
+        log.info("Running Foundry version " + this.getDescription().getVersion() + ".");
+        log.info("Please report any issues with Foundry to our GitHub repository: https://github.com/lewmc/foundry/issues");
 
         if (this.config.verbose) {
-            this.log.warn("Verbose mode is ENABLED.");
-            this.log.warn("This will likely cause a lot of console spam.");
-            this.log.warn("You should only enable this if you're having problems.");
-            this.log.info("");
+            log.warn("Verbose mode is ENABLED.");
+            log.warn("This will likely cause a lot of console spam.");
+            log.warn("You should only enable this if you're having problems.");
         }
 
         new SecurityUtil(this.config).startupWatchdog();
