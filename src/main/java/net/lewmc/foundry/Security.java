@@ -30,14 +30,14 @@ public class Security {
     }
 
     /**
-     * startupWatchdog keeps tabs on the startup processes, preventing your plugin from being started twice. You should only call this once during your onEnable function run.
+     * startWatchdog keeps tabs on the startup processes, preventing your plugin from being started twice. You should only call this once during your onEnable function run.
      */
-    public void startupWatchdog() {
+    public void startWatchdog() {
         Logger log = new Logger(this.config);
 
         String plugin = this.config.pluginId.toUpperCase();
 
-        if (Objects.equals(System.getProperty("FOUNDRY_WATCHDOG_"+plugin, ""), "TRUE")) {
+        if (Objects.equals(System.getProperty("FOUNDRY_WATCHDOG_"+plugin, ""), "ACTIVE")) {
             log.severe("");
             log.severe("WARNING: RELOAD DETECTED!");
             log.severe("");
@@ -55,6 +55,13 @@ public class Security {
 
         log.info("Watchdog started for " + plugin + ".");
 
-        System.setProperty("FOUNDRY_WATCHDOG_"+plugin, "TRUE");
+        System.setProperty("FOUNDRY_WATCHDOG_"+plugin, "ACTIVE");
+    }
+
+    /**
+     * Stops the watchdog service.
+     */
+    public void stopWatchdog() {
+        System.setProperty("FOUNDRY_WATCHDOG_"+this.config.pluginId.toUpperCase(),"INACTIVE");
     }
 }
