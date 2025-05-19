@@ -2,6 +2,9 @@ package net.lewmc.foundry;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
+/**
+ * The configuration class.
+ */
 public class FoundryConfig {
     /**
      * The plugin's ID
@@ -24,5 +27,13 @@ public class FoundryConfig {
      */
     public FoundryConfig(JavaPlugin plugin) {
         this.pluginId = plugin.getName().toLowerCase();
+    }
+
+    /**
+     * Sets if Foundry should be verbose.
+     * @param verbose boolean - true/false
+     */
+    public void setVerbose(boolean verbose) {
+        this.verbose = verbose;
     }
 }
