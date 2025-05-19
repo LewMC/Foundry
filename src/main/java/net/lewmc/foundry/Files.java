@@ -180,6 +180,7 @@ public class Files {
                 if (foundryConfig.verbose) {
                     this.log.info("Saved file to "+this.file);
                 }
+                this.close();
                 return true;
             } catch (IOException e) {
                 this.log.severe("Failed to save file " + this.file);
