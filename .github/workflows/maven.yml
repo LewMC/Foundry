@@ -1,3 +1,7 @@
+env:
+  MAVEN_NAME: ${{ secrets.MAVEN_NAME }}
+  MAVEN_SECRET: ${{ secrets.MAVEN_SECRET }}
+
 name: Publish project to LewMC Repo
 on:
   push:
@@ -7,7 +11,14 @@ jobs:
     steps:
       - uses: s4u/maven-settings-action@v3.1.0
         with:
-          servers: '[{"id": "lewmc", "username": "${{ secrets.MAVEN_NAME }}", "password": "${{ secrets.MAVEN_SECRET }}"}]'
+          servers: |
+            [
+              {
+                "id": "lewmc",
+                "username": "${env.MAVEN_NAME}",
+                "password": "${env.MAVEN_SECRET}"
+              }
+            ]
       - uses: actions/checkout@v4
       - name: Set up JDK
         uses: actions/setup-java@v2
