@@ -4,7 +4,6 @@
 - 📚 **Documentation** - https://wiki.lewmc.net/foundry.html
 - 🔧 **View the JavaDocs** - https://lewmc.github.io/Foundry
 - 📊 **Code Analysis** - https://sonarcloud.io/project/overview?id=LewMC_Foundry
-- ⭐ Enjoying Foundry? We'd love to hear your feedback on Spigot. Leave us a review [here](TBC).
 
 # Contributing
 We welcome contributions from the community. Please fork the repository, make your changes, and submit a pull request.
