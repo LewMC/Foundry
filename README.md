@@ -1,6 +1,7 @@
 ![Foundry Banner](https://cdn.modrinth.com/data/cached_images/53f7d3d07af13bc8b841f1c7c6c5530fa4b5088b_0.webp)
 
-- 💾 **Download Foundry** - https://lewmc.net/plugin/foundry
+- 🛜 **Maven Repository** - https://repo.lewmc.net
+- 📚 **Documentation** - https://wiki.lewmc.net/foundry.html
 - 🔧 **View the JavaDocs** - https://lewmc.github.io/Foundry
 - 📊 **Code Analysis** - https://sonarcloud.io/project/overview?id=LewMC_Foundry
 - ⭐ Enjoying Foundry? We'd love to hear your feedback on Spigot. Leave us a review [here](TBC).
