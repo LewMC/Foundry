@@ -1,4 +1,4 @@
-package net.lewmc.foundry.utils;
+package net.lewmc.foundry;
 
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -6,7 +6,7 @@ import org.bukkit.entity.Player;
 /**
  * Permission Handler.
  */
-public class PermissionHandler {
+public class Permissions {
 
     private final CommandSender cs;
 
@@ -14,7 +14,7 @@ public class PermissionHandler {
      * Constructor.
      * @param cs CommandSender - The user who executed the command.
      */
-    public PermissionHandler(CommandSender cs) {
+    public Permissions(CommandSender cs) {
         this.cs = cs;
     }
 

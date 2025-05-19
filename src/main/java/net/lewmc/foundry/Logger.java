@@ -1,19 +1,18 @@
-package net.lewmc.foundry.utils;
+package net.lewmc.foundry;
 
-import net.lewmc.foundry.FoundryConfig;
 import org.bukkit.Bukkit;
 
 /**
  * Logging Utility.
  */
-public class LogUtil {
+public class Logger {
     private final FoundryConfig config;
 
     /**
      * Constructor for the LogUtil class.
      * @param config - Reference to the config class.
      */
-    public LogUtil(FoundryConfig config) {
+    public Logger(FoundryConfig config) {
         this.config = config;
     }
 

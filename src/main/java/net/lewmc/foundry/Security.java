@@ -1,6 +1,4 @@
-package net.lewmc.foundry.utils;
-
-import net.lewmc.foundry.FoundryConfig;
+package net.lewmc.foundry;
 
 import java.util.Objects;
 import java.util.regex.Pattern;
@@ -8,7 +6,7 @@ import java.util.regex.Pattern;
 /**
  * Security Utility
  */
-public class SecurityUtil {
+public class Security {
     /**
      * Foundry's Configuration
      */
@@ -18,7 +16,7 @@ public class SecurityUtil {
      * Constructor for the Security Utility.
      * @param config FoundryConfig - Foundry's configuration.
      */
-    public SecurityUtil(FoundryConfig config) {
+    public Security(FoundryConfig config) {
         this.config = config;
     }
     
@@ -35,7 +33,7 @@ public class SecurityUtil {
      * startupWatchdog keeps tabs on the startup processes, preventing your plugin from being started twice. You should only call this once during your onEnable function run.
      */
     public void startupWatchdog() {
-        LogUtil log = new LogUtil(this.config);
+        Logger log = new Logger(this.config);
 
         String plugin = this.config.pluginId.toUpperCase();
 
