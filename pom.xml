@@ -118,11 +118,11 @@
 
     <distributionManagement>
         <repository>
-            <id>lewmc-releases</id>
+            <id>lewmc</id>
             <url>https://repo.lewmc.net/releases</url>
         </repository>
         <snapshotRepository>
-            <id>lewmc-snapshots</id>
+            <id>lewmc</id>
             <url>https://repo.lewmc.net/snapshots</url>
         </snapshotRepository>
     </distributionManagement>
