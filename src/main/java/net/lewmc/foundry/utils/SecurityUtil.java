@@ -37,13 +37,13 @@ public class SecurityUtil {
     public void startupWatchdog() {
         LogUtil log = new LogUtil(this.config);
 
-        if (Objects.equals(System.getProperty("FOUNDRY_WATCHDOG_"+this.config.pluginId, ""), "TRUE")) {
-            log.info("");
-            log.info("Startup completed.");
+        String plugin = this.config.pluginId.toUpperCase();
+
+        if (Objects.equals(System.getProperty("FOUNDRY_WATCHDOG_"+plugin, ""), "TRUE")) {
             log.severe("");
             log.severe("WARNING: RELOAD DETECTED!");
             log.severe("");
-            log.severe("This may cause issues with Foundry, other plugins, and your server overall.");
+            log.severe("This may cause issues with "+plugin+", other plugins, and your server overall.");
             log.severe("These issues include breaking permissions and other crashing exceptions.");
             log.severe("If you are reloading datapacks use /minecraft:reload instead.");
             log.severe("");
@@ -55,6 +55,8 @@ public class SecurityUtil {
             log.severe("");
         }
 
-        System.setProperty("FOUNDRY_WATCHDOG_"+this.config.pluginId, "TRUE");
+        log.info("Watchdog started for " + plugin + ".");
+
+        System.setProperty("FOUNDRY_WATCHDOG_"+plugin, "TRUE");
     }
 }

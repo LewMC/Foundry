@@ -20,14 +20,6 @@ public class Foundry extends JavaPlugin {
         this.config = new FoundryConfig("Foundry");
         LogUtil log = new LogUtil(this.config);
 
-        log.info("█████████████████████████████████████████████");
-        log.info("█▄─▄▄─█─▄▄─█▄─██─▄█▄─▀█▄─▄█▄─▄▄▀█▄─▄▄▀█▄─█─▄█");
-        log.info("██─▄███─██─██─██─███─█▄▀─███─██─██─▄─▄██▄─▄██");
-        log.info("▀▄▄▄▀▀▀▄▄▄▄▀▀▄▄▄▄▀▀▄▄▄▀▀▄▄▀▄▄▄▄▀▀▄▄▀▄▄▀▀▄▄▄▀▀");
-        log.info("");
-        log.info("█▄─▄▄─█─▄▄─█▄─██─▄█▄─▀█▄─▄█▄─▄▄▀█▄─▄▄▀█▄─█─▄█");
-        log.info("██─▄███─██─██─██─███─█▄▀─███─██─██─▄─▄██▄─▄██");
-        log.info("▀▄▄▄▀▀▀▄▄▄▄▀▀▄▄▄▄▀▀▄▄▄▀▀▄▄▀▄▄▄▄▀▀▄▄▀▄▄▀▀▄▄▄▀▀");
         log.info("Running Foundry version " + this.getDescription().getVersion() + ".");
         log.info("Please report any issues with Foundry to our GitHub repository: https://github.com/lewmc/foundry/issues");
 
@@ -39,6 +31,8 @@ public class Foundry extends JavaPlugin {
 
         new SecurityUtil(this.config).startupWatchdog();
         new Metrics(this, 25909);
+        
+        log.info("Foundry services available.");
     }
 
     /**
