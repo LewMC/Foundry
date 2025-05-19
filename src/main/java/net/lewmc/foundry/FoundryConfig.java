@@ -1,6 +1,6 @@
 package net.lewmc.foundry;
 
-import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.java.JavaPlugin;
 
 public class FoundryConfig {
     /**
@@ -11,7 +11,7 @@ public class FoundryConfig {
     /**
      * Reference to the parent plugin.
      */
-    public Plugin plugin;
+    public JavaPlugin plugin;
 
     /**
      * Should Foundry
@@ -22,7 +22,7 @@ public class FoundryConfig {
      * Sets up the FoundryConfig class.
      * @param plugin Plugin - The parent plugin.
      */
-    public FoundryConfig(Plugin plugin) {
-        this.pluginId = plugin.getName().toUpperCase();
+    public FoundryConfig(JavaPlugin plugin) {
+        this.pluginId = plugin.getName().toLowerCase();
     }
 }

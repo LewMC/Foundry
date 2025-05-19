@@ -4,7 +4,7 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,7 +16,7 @@ import java.util.UUID;
  * File Utility.
  */
 public class Files {
-    private final Plugin plugin;
+    private final JavaPlugin plugin;
     private final Logger log;
     private final FoundryConfig foundryConfig;
     private YamlConfiguration config;
@@ -26,7 +26,7 @@ public class Files {
      * The constructor for the Files class.
      * @param plugin Reference to the main plugin class.
      */
-    public Files(FoundryConfig config, Plugin plugin) {
+    public Files(FoundryConfig config, JavaPlugin plugin) {
         this.plugin = plugin;
         this.foundryConfig = config;
         this.log = new Logger(config);
