@@ -1,8 +1,10 @@
-package net.lewmc.foundry.command;
+package net.lewmc.foundry;
 
-import net.lewmc.foundry.FoundryConfig;
-import net.lewmc.foundry.Logger;
+import org.bukkit.Bukkit;
 import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.TabCompleter;
+import org.bukkit.event.Event;
+import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Objects;
@@ -10,7 +12,7 @@ import java.util.Objects;
 /**
  * Command Registry
  */
-public class CommandRegistry {
+public class Registry {
 
     /**
      * Reference to the main plugin class.
@@ -27,7 +29,7 @@ public class CommandRegistry {
      * @param config FoundryConfig - Foundry's configuration.
      * @param plugin Plugin - Reference to the main plugin class.
      */
-    public CommandRegistry(FoundryConfig config, JavaPlugin plugin) {
+    public Registry(FoundryConfig config, JavaPlugin plugin) {
         this.config = config;
         this.plugin = plugin;
     }
@@ -38,7 +40,7 @@ public class CommandRegistry {
      * @param executor CommandExecutor - The command executor class.
      * @return boolean - Was the command successfully registered?
      */
-    public boolean register(String command, CommandExecutor executor) {
+    public boolean command(String command, CommandExecutor executor) {
         if (this.plugin.getCommand(command) != null) {
             Objects.requireNonNull(this.plugin.getCommand(command)).setExecutor(executor);
             return true;
@@ -54,7 +56,7 @@ public class CommandRegistry {
      * @param executor CommandExecutor - The command executor class.
      * @return boolean[] - Was the command successfully registered? Returns an array.
      */
-    public boolean[] register(String[] commands, CommandExecutor executor) {
+    public boolean[] command(String[] commands, CommandExecutor executor) {
         boolean[] success = new boolean[commands.length];
         int i = 0;
 
@@ -69,5 +71,31 @@ public class CommandRegistry {
             i++;
         }
         return success;
+    }
+
+    /**
+     * Registers a Tab Completer with the server, handling any potential issues.
+     * @param command String - The command label, what users type into chat after the / to execute it.
+     * @param completer TabCompleter - The tab completer class.
+     * @return boolean - Was the tab completer successfully registered?
+     */
+    public boolean tabCompleter(String command, TabCompleter completer) {
+        if (this.plugin.getCommand(command) != null) {
+            Objects.requireNonNull(this.plugin.getCommand("tp")).setTabCompleter(completer);
+            return true;
+        } else {
+            new Logger(this.config).severe("Failed to register tab completer " + command + " because it is null.");
+            return false;
+        }
+    }
+
+    /**
+     * Registers an event with the server, handling any potential issues.
+     * @param event Listener - The event listener class.
+     * @return boolean - Was the event successfully registered?
+     */
+    public boolean event(Listener event) {
+        Bukkit.getServer().getPluginManager().registerEvents(event, this.plugin);
+        return true;
     }
 }
