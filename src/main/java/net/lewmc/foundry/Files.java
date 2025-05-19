@@ -137,17 +137,12 @@ public class Files {
      * @return boolean - If the operation was successful
      */
     public boolean delete(String path) {
-        if (this.isOpen()) {
-            try {
-                File file = new File(this.plugin.getDataFolder(), this.parseFileName(path));
-                return file.delete();
-            } catch (SecurityException e) {
-                this.log.severe("Failed to delete file " + path);
-                this.log.severe(e.getMessage());
-                return false;
-            }
-        } else {
-            this.log.warn("Tried to delete a file without opening a file first.");
+        try {
+            File file = new File(this.plugin.getDataFolder(), this.parseFileName(path));
+            return file.delete();
+        } catch (SecurityException e) {
+            this.log.severe("Failed to delete file " + path);
+            this.log.severe(e.getMessage());
             return false;
         }
     }
