@@ -1,9 +1,6 @@
 ![Foundry Banner](https://cdn.modrinth.com/data/cached_images/53f7d3d07af13bc8b841f1c7c6c5530fa4b5088b_0.webp)
 
-- 🛜 **Maven Repository** - https://repo.lewmc.net
-- 📚 **Documentation** - https://wiki.lewmc.net/foundry.html
-- 🔧 **View the JavaDocs** - https://lewmc.github.io/Foundry
-- 📊 **Code Analysis** - https://sonarcloud.io/project/overview?id=LewMC_Foundry
+[Maven Repository](https://repo.lewmc.net) - [Documentation](https://wiki.lewmc.net/foundry.html) - [JavaDocs](https://lewmc.github.io/foundry) - [Code Analysis](https://sonarcloud.io/project/overview?id=LewMC_Foundry)
 
 # Contributing
 We welcome contributions from the community. Please fork the repository, make your changes, and submit a pull request.
@@ -11,7 +8,7 @@ We welcome contributions from the community. Please fork the repository, make yo
 Please read [our contributor guide](CONTRIBUTING.md) before submitting any changes, thank you!
 
 Please merge any changes into the `next-update` branch, not the `main` branch.
-This helps us to ensure that our snapshot builds are labelled as snapshot so that it is clear to users download them that they are still in development, and that any changes being made will work with future versions of Essence.
+This helps us to ensure that our snapshot builds are labelled as snapshot so that it is clear to users download them that they are still in development, and that any changes being made will work with future versions of Foundry.
 
 ## Build Process
 
