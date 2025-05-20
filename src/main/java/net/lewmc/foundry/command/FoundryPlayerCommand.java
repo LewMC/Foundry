@@ -12,18 +12,19 @@ public abstract class FoundryPlayerCommand extends FoundryCommand {
 
     /**
      * Runs the command with a check to ensure that the executor is a player entity.
-     * @param sender CommandSender - The sender of the command.
-     * @param command Command - The command.
-     * @param label String - Label for the command.
-     * @param args String[] - Arguments passed to the command.
+     * @param cs         Player - The sender of the command.
+     * @param command   Command - The command.
+     * @param label     String - Label for the command.
+     * @param args      String[] - Arguments passed to the command.
      * @return boolean - If the command was successful.
      */
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (!(sender instanceof Player)) {
-            sender.sendMessage(ChatColor.RED + "This command can only be run by players in-game.");
+    public boolean onCommand(CommandSender cs, Command command, String label, String[] args) {
+        if (!(cs instanceof Player p)) {
+            cs.sendMessage(ChatColor.RED + "This command can only be run by players in-game.");
             return true;
+        } else {
+            return super.onCommand(p, command, label, args);
         }
-        return super.onCommand(sender, command, label, args);
     }
 }

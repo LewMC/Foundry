@@ -42,18 +42,18 @@ public abstract class FoundryCommand implements CommandExecutor {
 
     /**
      * Runs the command.
-     * @param sender CommandSender - The sender of the command.
-     * @param command Command - The command.
-     * @param label String - Label for the command.
-     * @param args String[] - Arguments passed to the command.
+     * @param cs        CommandSender - The sender of the command.
+     * @param command   Command - The command.
+     * @param label     String - Label for the command.
+     * @param args      String[] - Arguments passed to the command.
      * @return boolean - If the command was successful.
      */
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (hasPermission(sender, requiredPermission())) {
-            return onRun(sender, command, label, args);
+    public boolean onCommand(CommandSender cs, Command command, String label, String[] args) {
+        if (hasPermission(cs, requiredPermission())) {
+            return onRun(cs, command, label, args);
         } else {
-            sender.sendMessage(ChatColor.RED + "You do not have permission to use this command.");
+            cs.sendMessage(ChatColor.RED + "You do not have permission to use this command.");
             return true;
         }
     }
