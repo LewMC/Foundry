@@ -17,15 +17,16 @@ public class FoundryConfig {
     public JavaPlugin plugin;
 
     /**
-     * Should Foundry
+     * Should Foundry be verbose?
      */
-    public boolean verbose;
+    public boolean verbose = false;
 
     /**
      * Sets up the FoundryConfig class.
      * @param plugin Plugin - The parent plugin.
      */
     public FoundryConfig(JavaPlugin plugin) {
+        this.plugin = plugin;
         this.pluginId = plugin.getName().toLowerCase();
     }
 

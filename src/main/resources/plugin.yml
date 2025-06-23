@@ -5,14 +5,5 @@ api-version: 1.20
 author: LewMC
 description: A shared library for modern plugins.
 website: https://lewmc.net
-load: POSTWORLD
 folia-supported: true
 softdepend: []
-commands:
-  foundry:
-    description: Main command
-    usage: /<command> [help] [topic] [chapter]
-permissions:
-  foundry.*:
-    description: Access to all essence commands.
-    default: op
