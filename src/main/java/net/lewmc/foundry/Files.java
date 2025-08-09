@@ -1,5 +1,6 @@
 package net.lewmc.foundry;
 
+import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -362,6 +363,15 @@ public class Files {
      */
     public String playerDataFile(Player player) {
         return "data/players/"+player.getUniqueId()+".yml";
+    }
+
+    /**
+     * Return the location of the player's data file from an instance of the player.
+     * @param offlinePlayer OfflinePlayer - The player.
+     * @return The data file URI inside the /plugin/essence folder.
+     */
+    public String playerDataFile(OfflinePlayer offlinePlayer) {
+        return "data/players/"+offlinePlayer.getUniqueId()+".yml";
     }
 
     /**
