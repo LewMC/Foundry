@@ -23,10 +23,7 @@ Install JDK 21 before continuing. Click [here](https://docs.oracle.com/en/java/j
 git clone https://github.com/lewmc/foundry && cd foundry
 
 # Perform a clean build (optional if you're rebuilding).
-mvn clean package -Dmaven.test.skip=true
-
-# Build the package with an explicit version target of 21.
-mvn -B package --file pom.xml -Dmaven.compiler.source=21 -Dmaven.compiler.target=21
+mvn clean package
 ```
 
 # Licensing
