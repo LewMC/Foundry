@@ -1,14 +1,12 @@
 package net.lewmc.foundry;
 
 import org.bukkit.Bukkit;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.PluginCommand;
-import org.bukkit.command.TabCompleter;
+import org.bukkit.command.*;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.jetbrains.annotations.NotNull;
 
-import java.util.Arrays;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * Command Registry
@@ -29,6 +27,8 @@ public class Registry {
      * Link to the IBukkit class which handles some Bukkit internal processes.
      */
     private final IBukkit ib;
+    private final Map<String, Command> runtimeCommands = new HashMap<>();
+    private final Map<String, TabCompleter> runtimeCompleters = new HashMap<>();
 
     /**
      * Constructor for the class.
@@ -63,89 +63,93 @@ public class Registry {
 
     /**
      * Registers a command with the server that is already set up in the plugin.yml file, handling any potential issues.
-     * @param command String - The command label, what users type into chat after the / to execute it.
+     * @param label String - The command label, what users type into chat after the / to execute it.
      * @param executor CommandExecutor - The command executor class.
      * @return boolean - Was the command successfully registered?
      */
-    public boolean ymlCommand(String command, CommandExecutor executor) {
-        if (this.plugin.getCommand(command) != null) {
-            Objects.requireNonNull(this.plugin.getCommand(command)).setExecutor(executor);
-            this.verboseAlert("ymlCommand", command);
+    public boolean ymlCommand(String label, CommandExecutor executor) {
+        if (this.plugin.getCommand(label) != null) {
+            Objects.requireNonNull(this.plugin.getCommand(label)).setExecutor(executor);
+            this.verboseAlert("ymlCommand", label);
             return true;
         } else {
-            new Logger(this.config).severe("Failed to register ymlCommand " + command + " because it is null.");
+            new Logger(this.config).severe("Failed to register ymlCommand " + label + " because it is null.");
             return false;
         }
     }
 
     /**
      * Registers a command with the server that is already set up in the plugin.yml file, handling any potential issues. Do not use this for aliases, only use it when multiple commands use the same executor.
-     * @param commands String[] - The command labels, what users type into chat after the / to execute it.
+     * @param labels String[] - The command labels, what users type into chat after the / to execute it.
      * @param executor CommandExecutor - The command executor class.
      * @return boolean[] - Was the command successfully registered? Returns an array.
      */
-    public boolean[] ymlCommand(String[] commands, CommandExecutor executor) {
-        boolean[] success = new boolean[commands.length];
+    public boolean[] ymlCommand(String[] labels, CommandExecutor executor) {
+        boolean[] success = new boolean[labels.length];
         int i = 0;
 
-        for (String command : commands) {
-            if (this.plugin.getCommand(command) != null) {
-                Objects.requireNonNull(this.plugin.getCommand(command)).setExecutor(executor);
-                this.verboseAlert("ymlCommand", command);
-                success[i] = true;
-            } else {
-                new Logger(this.config).severe("Failed to register ymlCommand " + command + " because it is null.");
-                success[i] = false;
-            }
+        for (String command : labels) {
+            success[i] = this.ymlCommand(command, executor);
             i++;
         }
+
         return success;
     }
 
     /**
      * Registers a command with the server that is NOT set up in the plugin.yml file, handling any potential issues.
-     * @param command String - The command label, what users type into chat after the / to execute it.
+     * @param label String - The command label, what users type into chat after the / to execute it.
      * @param executor CommandExecutor - The command executor class.
      * @return boolean - Was the command successfully registered?
      */
-    public boolean runtimeCommand(String command, CommandExecutor executor, String... aliases) {
-        if (command != null && executor != null) {
-            PluginCommand rCmd = ib.constructRuntimeCommand(aliases[0]);
-            rCmd.setAliases(Arrays.asList(aliases));
-            ib.getCommandMap().register(this.plugin.getDescription().getName(), rCmd);
+    public boolean runtimeCommand(String label, CommandExecutor executor, String... aliases) {
+        if (label != null && executor != null) {
+            Command dynamicCommand = new Command(label) {
+                @Override
+                public boolean execute(@NotNull CommandSender sender, @NotNull String commandLabel, String[] args) {
+                    return executor.onCommand(sender, this, commandLabel, args);
+                }
 
-            this.verboseAlert("runtimeCommand", command);
-            return true;
+                @Override
+                public @NotNull List<String> tabComplete(@NotNull CommandSender sender, @NotNull String alias, String[] args) {
+                    TabCompleter completer = runtimeCompleters.get(getName().toLowerCase());
+                    if (completer != null) {
+                        return Objects.requireNonNull(completer.onTabComplete(sender, this, alias, args));
+                    }
+                    return super.tabComplete(sender, alias, args);
+                }
+            };
+
+            dynamicCommand.setAliases(Arrays.asList(aliases));
+
+            CommandMap map = ib.getCommandMap();
+            if (map != null) {
+                map.register(plugin.getDescription().getName(), dynamicCommand);
+                this.runtimeCommands.put(label.toLowerCase(), dynamicCommand);
+                return true;
+            }
+            return false;
         } else {
-            new Logger(this.config).severe("Failed to register runtimeCommand " + command + " because it is null.");
+            new Logger(this.config).severe("Failed to register runtimeCommand " + label + " because it is null.");
             return false;
         }
     }
 
     /**
      * Registers a command with the server that is NOT set up in the plugin.yml file, handling any potential issues. Do not use this for aliases, only use it when multiple commands use the same executor.
-     * @param commands String[] - The command labels, what users type into chat after the / to execute it.
+     * @param labels String[] - The command labels, what users type into chat after the / to execute it.
      * @param executor CommandExecutor - The command executor class.
      * @return boolean[] - Was the command successfully registered? Returns an array.
      */
-    public boolean[] runtimeCommand(String[] commands, CommandExecutor executor, String... aliases) {
-        boolean[] success = new boolean[commands.length];
+    public boolean[] runtimeCommand(String[] labels, CommandExecutor executor, String... aliases) {
+        boolean[] success = new boolean[labels.length];
         int i = 0;
 
-        for (String command : commands) {
-            if (command != null && executor != null) {
-                PluginCommand rCmd = ib.constructRuntimeCommand(aliases[0]);
-                rCmd.setAliases(Arrays.asList(aliases));
-                ib.getCommandMap().register(this.plugin.getDescription().getName(), rCmd);
-
-                this.verboseAlert("runtimeCommand", command);
-                success[i] = true;
-            } else {
-                new Logger(this.config).severe("Failed to register runtimeCommand " + command + " because it is null.");
-                success[i] = false;
-            }
+        for (String command : labels) {
+            success[i] = this.runtimeCommand(command, executor, aliases);
             i++;
         }
+
         return success;
     }
 
@@ -156,14 +160,25 @@ public class Registry {
      * @return boolean - Was the tab completer successfully registered?
      */
     public boolean tabCompleter(String command, TabCompleter completer) {
-        if (this.plugin.getCommand(command) != null) {
-            Objects.requireNonNull(this.plugin.getCommand(command)).setTabCompleter(completer);
+        // ymlCommand
+        Command cmd = this.plugin.getCommand(command);
+        if (cmd != null && cmd instanceof PluginCommand) {
+            ((PluginCommand) cmd).setTabCompleter(completer);
             this.verboseAlert("Tab completer", completer.toString());
             return true;
-        } else {
-            new Logger(this.config).severe("Failed to register tab completer " + completer.toString() + " because it is null.");
-            return false;
         }
+
+        // runtimeCommand
+        Command runtimeCmd = runtimeCommands.get(command.toLowerCase());
+        if (runtimeCmd != null) {
+            runtimeCompleters.put(command.toLowerCase(), completer);
+            this.verboseAlert("Runtime tab completer", completer.toString());
+            return true;
+        }
+
+        // Failure
+        new Logger(this.config).severe("Failed to register tab completer " + completer.toString() + " because it is null.");
+        return false;
     }
 
     /**
@@ -178,16 +193,10 @@ public class Registry {
         int i = 0;
 
         for (String command : commands) {
-            if (this.plugin.getCommand(command) != null) {
-                Objects.requireNonNull(this.plugin.getCommand(command)).setTabCompleter(completer);
-                this.verboseAlert("Tab completer", completer.toString());
-                success[i] = true;
-            } else {
-                new Logger(this.config).severe("Failed to register tab completer " + completer.toString() + " because it is null.");
-                success[i] = false;
-            }
+            success[i] = this.tabCompleter(command, completer);
             i++;
         }
+
         return success;
     }
 

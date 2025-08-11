@@ -7,6 +7,7 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 
 /**
@@ -39,9 +40,18 @@ public class IBukkit {
      */
     public CommandMap getCommandMap() {
        try {
-           return this.plugin.getServer().getCommandMap();
+           Field f = plugin.getServer().getClass().getDeclaredField("commandMap");
+           f.setAccessible(true);
+           CommandMap cm = (CommandMap) f.get(plugin.getServer());
+           if (cm != null) {
+               return cm;
+           } else {
+               new Logger(this.config).severe("Foundry tried to access Bukkit internals (IBukkit.getCommandMap) but couldn't find it.");
+               return null;
+           }
        } catch (Exception e) {
            new Logger(this.config).severe("Foundry tried to access Bukkit internals (IBukkit.getCommandMap) and died. Threw exception: "+e.getMessage());
+           e.printStackTrace();
            return null;
        }
     }
@@ -62,7 +72,8 @@ public class IBukkit {
             command = c.newInstance(name, plugin);
         } catch (SecurityException | InvocationTargetException | IllegalArgumentException | IllegalAccessException |
                  InstantiationException | NoSuchMethodException e) {
-            new Logger(this.config).severe("Foundry tried to access Bukkit internals (IBukkit.constructRuntimeCommand) and died. Threw exception: "+e.getMessage());
+            new Logger(this.config).severe("Foundry tried to access Bukkit internals (IBukkit.constructRuntimeCommand) on '"+name+"' and died. Threw exception: "+e.getMessage());
+            e.printStackTrace();
         }
 
         return command;
@@ -77,6 +88,7 @@ public class IBukkit {
            return this.plugin.getServer().getPluginManager();
        } catch (Exception e) {
            new Logger(this.config).severe("Foundry tried to access Bukkit internals (IBukkit.getPluginManager) and died. Threw exception: "+e.getMessage());
+           e.printStackTrace();
            return null;
        }
     }
