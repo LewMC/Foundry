@@ -37,4 +37,12 @@ public class FoundryConfig {
     public void setVerbose(boolean verbose) {
         this.verbose = verbose;
     }
+
+    /**
+     * Overwrites Foundry's preset Plugin ID.
+     * @param pluginId String - Plugin ID
+     */
+    public void setPluginId(String pluginId) {
+        this.pluginId = pluginId.toLowerCase();
+    }
 }
