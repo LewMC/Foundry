@@ -1,7 +1,6 @@
 package net.lewmc.foundry;
 
 import org.bukkit.Bukkit;
-import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.command.TabCompleter;
@@ -110,7 +109,7 @@ public class Registry {
      * @return boolean - Was the command successfully registered?
      */
     public boolean runtimeCommand(String command, CommandExecutor executor, String... aliases) {
-        if (this.plugin.getCommand(command) != null) {
+        if (command != null && executor != null) {
             PluginCommand rCmd = ib.constructRuntimeCommand(aliases[0]);
             rCmd.setAliases(Arrays.asList(aliases));
             ib.getCommandMap().register(this.plugin.getDescription().getName(), rCmd);
@@ -134,7 +133,7 @@ public class Registry {
         int i = 0;
 
         for (String command : commands) {
-            if (this.plugin.getCommand(command) != null) {
+            if (command != null && executor != null) {
                 PluginCommand rCmd = ib.constructRuntimeCommand(aliases[0]);
                 rCmd.setAliases(Arrays.asList(aliases));
                 ib.getCommandMap().register(this.plugin.getDescription().getName(), rCmd);
